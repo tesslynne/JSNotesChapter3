@@ -1,22 +1,24 @@
 /* JavaScript & jQuery - Chapter 3: Functions, Methods & Programming */
 /* The book used a font called Eau Sans - the download examples use Open Sans */
 
-/*Note on Tess Git: this is styling pulled from above source and not of my own, just used to practice corresponding JS*/;
+/*code sourced from Jon Duckett's book on JS to work with*/
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 body {
   background-color: #fff;
-  background: url("../images/travelworthy-backdrop.jpg") no-repeat center center fixed;
+  background: url("http://www.publicdomainpictures.net/pictures/20000/velka/sunset-colors.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   margin: 0;
-  font-family: 'Open Sans', sans-serif;}
+  font-family: 'Open Sans', sans-serif;
+}
 
 h1 {
   background: #1e1b1e url("../images/travelworthy-logo.gif") no-repeat;
+  opacity: .8;
   width: 230px;
   height: 180px;
   float: left;
@@ -52,6 +54,7 @@ p + h2 {
 
 #info {
   background-color: #1e1b1e;
+  opacity: .9;
   color: #fff;
   width: 200px;
   padding: 0 15px;

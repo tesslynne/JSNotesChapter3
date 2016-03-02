@@ -142,35 +142,148 @@
 
 //CREATING OBJECTS USING LITERAL NOTATION 	 pg 104 PRACTICE
 
-var hotel = {
-	name: "Quay", //string
-	rooms: 40, //number, obviously.
-	booked: 25, //... also a number.
-	checkAvailability:  function () {
-		return this.rooms - this.booked
-	}
-};
+// var hotel = {
+// 	name: "Quay", //string
+// 	rooms: 40, //number, obviously.
+// 	booked: 25, //... also a number.
+// 	checkAvailability:  function () {
+// 		return this.rooms - this.booked
+// 	}
+// };
 
-var elName = document.getElementById("hotelName")
-elName.textContent = hotel.name
+// var elName = document.getElementById("hotelName")
+// elName.textContent = hotel.name
 
-var elRooms = document.getElementById("rooms")
-elRooms.textContent = hotel.checkAvailability();
+// var elRooms = document.getElementById("rooms")
+// elRooms.textContent = hotel.checkAvailability();
 
+
+// var hotel = {
+// 	name: "Park",
+// 	rooms: 120,
+// 	booked: 77,
+// 	checkAvailability: function() {
+// 		return this.rooms - this.booked
+// 	}
+// };
+
+// var elName = document.getElementById("hotelName")
+// elName.textContent = hotel.name
+
+// var elRooms = document.getElementById("rooms")
+// elRooms.textContent = hotel.checkAvailability()
+
+// //the above crazy notes are just for pages 85-104 of duckett's book, for practicing write script
+
+
+
+
+
+//working with strings
+
+// var saying = "Home sweet home"
+// var msg = "<h2>length: </h2><p>" + saying.length + "</p>"
+
+// msg += "<h2>uppercase: </h2><p>" + saying.toUpperCase() + "</p>"
+// msg += "<h2>lowercase: </h2><p>" + saying.toLowerCase() + "</p>"
+// msg +=  "<h2>character index: 12</h2><p>" + saying.charAt(12) + "</p>"
+// msg += "<h2>first ee: </h2><p>" + saying.indexOf("ee") + "</p>"
+// msg += "<h2>last e: </h2><p>" + saying.lastIndexOf("e") + "</p>"
+// msg += "<h2>character index: 8-14</h2><p>" + saying.substring(8,14) + "</p>"
+// msg += "<h2>replace: </h2><p" + saying.replace("me", "w") + "</p>"
+
+// //select the element with an id attribute and add the value of the msg variable above inside of it
+
+// var el = document.getElementById("info")
+// el.innerHTML = msg;
+
+
+// var originalNumber = 10.23456
+
+// var msg = "<h2>original number</h2><p>" + originalNumber + "</p>"
+// msg += "<h2>3 decimel places</h2><p>" + originalNumber.toFixed(3) + "</p>"
+// msg += "<h2>3 digits</h2><p>" + originalNumber.toPrecision(3) + "</p>"
+// var el2 = document.getElementById("info")
+// 	el.innerHTML = msg
+
+
+// the date object
+
+//for footer year
+var today = new Date()
+var year = today.getFullYear()
+
+var el = document.getElementById("footer")
+el.innerHTML = '<p>Copyright &copy; ' + year  + '</p>'
+
+
+//for the banner on left side showcasing #years in business
+
+var today = new Date()
+var year = today.getFullYear()
+var est = new Date("Apr 16, 1996, 15:45:55")
+var difference = today.getTime() - est.getTime()
+difference = (difference / 31556900000)
+
+var elMsg = document.getElementById("message")
+elMsg.textContent = Math.floor(difference) + " years of online travel advice"
+
+
+// re-create the hotel object and write out the offer details
+
+(function() {
 
 var hotel = {
 	name: "Park",
-	rooms: 120,
-	booked: 77,
-	checkAvailability: function() {
-		return this.rooms - this.booked
+	roomRate: 220, //amount in dollars
+	discount: 15, // percentage off
+	offerPrice: function() {
+		var offerRate =  this.roomRate * ((100 - this.discount) / 100)
+		return offerRate
 	}
-};
+}
+// write out the hotel name, standard rate, and the special rate
 
-var elName = document.getElementById("hotelName")
-elName.textContent = hotel.name
+var hotelName, roomRate, specialRate  //declare the variables
 
-var elRooms = document.getElementById("rooms")
-elRooms.textContent = hotel.checkAvailability()
+hotelName = document.getElementById("hotelName")
+roomRate = document.getElementById("roomRate")
+specialRate = document.getElementById("specialRate")
 
-//the above crazy notes are just for pages 85-104 of duckett's book, for practicing write script
+hotelName.textContent = hotel.name //write hotel name
+roomRate.textContent = "$" + hotel.roomRate.toFixed(2) //write room rate
+specialRate.textContent = "$" + hotel.offerPrice() // write offer price
+
+//CALCULATE AND WRITE OUT EXPIRY DETAILS FOR THE OFFER
+
+var expiryMsg //message displayed to users
+var today  //today's date
+var elEnds // element that will show msg about offer end
+
+function offerExpires(today) {
+	//declare var within func for local scope
+	var weekFromToday, day, date, month, year, dayNames, monthNames
+	//add 7 days time in milliseconds
+	weekFromToday = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
+	//create arrays to hold the days/months
+	dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+	monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "November", "December"]
+	//collect the parts of the date to show on the page
+
+	day = dayNames[weekFromToday.getDay()]
+	date = weekFromToday.getDate()
+	month = monthNames[weekFromToday.getMonth()]
+	year = weekFromToday.getFullYear()
+
+	//create message
+	expiryMsg = "Offer expires next "
+	expiryMsg += day + " <br>(" + date + " " + month + " " + year + ")"
+	return expiryMsg
+}
+
+today = new Date()  //put today's date in var
+elEnds = document.getElementById("offerEnds")
+elEnds.innerHTML = offerExpires(today) // add the expry message
+
+// finish the immediately invoked function expression
+}())
